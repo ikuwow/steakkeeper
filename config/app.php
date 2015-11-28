@@ -5,9 +5,9 @@ if (file_exists(CONFIG . DS . 'env.php')) {
 
 switch (getenv('CAKE_ENV')) {
     case 'production':
+    case 'staging':
         $debug = false;
         break;
-    case 'staging':
     case 'development':
         $debug = true;
         break;
@@ -16,17 +16,17 @@ switch (getenv('CAKE_ENV')) {
         exit;
 }
 
-$securitySalt = getenv('CAKE_securitySalt');
+$securitySalt = getenv('CAKE_SECURITY_SALT');
 
-$dbHost = getenv('CAKE_dbHost');
-$dbUser = getenv('CAKE_dbUser');
-$dbPass = getenv('CAKE_dbPass');
-$dbName = getenv('CAKE_dbName');
+$dbHost = getenv('CAKE_DB_HOST');
+$dbUser = getenv('CAKE_DB_USER');
+$dbPass = getenv('CAKE_DB_PASS');
+$dbName = getenv('CAKE_DB_NAME');
 
-$testDbHost = getenv('CAKE_testDbHost');
-$testDbUser = getenv('CAKE_testDbUser');
-$testDbPass = getenv('CAKE_testDbPass');
-$testDbName = getenv('CAKE_testDbName');
+$testDbHost = getenv('CAKE_TEST_DB_HOST');
+$testDbUser = getenv('CAKE_TEST_DB_USER');
+$testDbPass = getenv('CAKE_TEST_DB_PASS');
+$testDbName = getenv('CAKE_TEST_DB_NAME');
 
 
 return [
