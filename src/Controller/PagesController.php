@@ -28,7 +28,12 @@ use Cake\View\Exception\MissingTemplateException;
 class PagesController extends AppController
 {
 
-    public function top() {
+    /**
+     * toppage
+     * @return void
+     */
+    public function top()
+    {
     }
 
     /**

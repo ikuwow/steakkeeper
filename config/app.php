@@ -1,6 +1,6 @@
 <?php
-if (file_exists(CONFIG.DS.'env.php')) {
-    require_once CONFIG.DS.'env.php';
+if (file_exists(CONFIG . DS . 'env.php')) {
+    require_once CONFIG . DS . 'env.php';
 }
 
 switch (getenv('CAKE_ENV')) {
@@ -16,17 +16,17 @@ switch (getenv('CAKE_ENV')) {
         exit;
 }
 
-$security_salt = getenv('CAKE_SECURITY_SALT');
+$securitySalt = getenv('CAKE_securitySalt');
 
-$db_host = getenv('CAKE_DB_HOST');
-$db_user = getenv('CAKE_DB_USER');
-$db_pass = getenv('CAKE_DB_PASS');
-$db_name = getenv('CAKE_DB_NAME');
+$dbHost = getenv('CAKE_dbHost');
+$dbUser = getenv('CAKE_dbUser');
+$dbPass = getenv('CAKE_dbPass');
+$dbName = getenv('CAKE_dbName');
 
-$test_db_host = getenv('CAKE_TEST_DB_HOST');
-$test_db_user = getenv('CAKE_TEST_DB_USER');
-$test_db_pass = getenv('CAKE_TEST_DB_PASS');
-$test_db_name = getenv('CAKE_TEST_DB_NAME');
+$testDbHost = getenv('CAKE_testDbHost');
+$testDbUser = getenv('CAKE_testDbUser');
+$testDbPass = getenv('CAKE_testDbPass');
+$testDbName = getenv('CAKE_testDbName');
 
 
 return [
@@ -92,7 +92,7 @@ return [
      *   You should treat it as extremely sensitive data.
      */
     'Security' => [
-        'salt' => $security_salt
+        'salt' => $securitySalt
     ],
 
     /**
@@ -238,16 +238,16 @@ return [
             'className' => 'Cake\Database\Connection',
             'driver' => 'Cake\Database\Driver\Postgres',
             'persistent' => false,
-            'host' => $db_host,
+            'host' => $dbHost,
             /**
              * CakePHP will use the default DB port based on the driver selected
              * MySQL on MAMP uses port 8889, MAMP users will want to uncomment
              * the following line and set the port accordingly
              */
             //'port' => 'nonstandard_port_number',
-            'username' => $db_user,
-            'password' => $db_pass,
-            'database' => $db_name,
+            'username' => $dbUser,
+            'password' => $dbPass,
+            'database' => $dbName,
             'encoding' => 'utf8',
             'timezone' => 'UTC',
             'cacheMetadata' => true,
@@ -280,11 +280,11 @@ return [
             'className' => 'Cake\Database\Connection',
             'driver' => 'Cake\Database\Driver\Mysql',
             'persistent' => false,
-            'host' => $test_db_host,
+            'host' => $testDbHost,
             //'port' => 'nonstandard_port_number',
-            'username' => $test_db_user,
-            'password' => $test_db_pass,
-            'database' => $test_db_name,
+            'username' => $testDbUser,
+            'password' => $testDbPass,
+            'database' => $testDbName,
             'encoding' => 'utf8',
             'timezone' => 'UTC',
             'cacheMetadata' => true,
