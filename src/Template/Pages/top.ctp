@@ -1,3 +1,3 @@
-<h1>SteakKeeper</h1>
+<h1>StreakKeeper</h1>
 
-<p>Don't stop your GitHub steak.</p>
+<p>Don't stop your GitHub streak.</p>
