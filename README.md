@@ -1,9 +1,9 @@
 # SteakKeeper
 
-[![Build Status](https://travis-ci.org/ikuwow/steakkeeper.svg)](https://travis-ci.org/ikuwow/steakkeeper)
+[![Build Status](https://travis-ci.org/ikuwow/streakkeeper.svg)](https://travis-ci.org/ikuwow/streakkeeper)
 
 Keep coding.
 
-Don't stop your GitHub steak.
+Don't stop your GitHub streak.
 
-http://steakkeeper.herokuapp.com
+http://streakkeeper.herokuapp.com
