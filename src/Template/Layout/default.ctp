@@ -26,14 +26,17 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     </title>
     <?= $this->Html->meta('icon') ?>
 
-    <?= $this->Html->css('base.css') ?>
-    <?= $this->Html->css('cake.css') ?>
+    <?php //= $this->Html->css('base.css') ?>
+    <?php //= $this->Html->css('cake.css') ?>
+    <?php // = $this->fetch('css') ?>
+
+    <?= $this->Html->css('//cdn.jsdelivr.net/primer/2.4.0/primer.css'); ?>
+    <?= $this->Html->css('//cdnjs.cloudflare.com/ajax/libs/octicons/3.3.0/octicons.min.css'); ?>
 
     <?= $this->fetch('meta') ?>
-    <?= $this->fetch('css') ?>
-    <?= $this->fetch('script') ?>
 </head>
 <body>
+    <?php /*
     <nav class="top-bar expanded" data-topbar role="navigation">
         <ul class="title-area large-3 medium-4 columns">
             <li class="name">
@@ -47,11 +50,13 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
             </ul>
         </section>
     </nav>
+     */?>
     <?= $this->Flash->render() ?>
     <section class="container clearfix">
         <?= $this->fetch('content') ?>
     </section>
     <footer>
     </footer>
+    <?= $this->fetch('script') ?>
 </body>
 </html>
