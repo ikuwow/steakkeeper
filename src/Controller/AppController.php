@@ -28,6 +28,8 @@ use Cake\Event\Event;
 class AppController extends Controller
 {
 
+    public $components = ['Auth'];
+
     /**
      * Initialization hook method.
      *
