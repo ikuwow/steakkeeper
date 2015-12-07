@@ -187,11 +187,8 @@ if (Configure::read('debug')) {
 }
 
 Plugin::load([
-    'Migrations',
-    'ADmad/HybridAuth' => ['bootstrap' => true, 'routes' => true]
+    'Migrations'
 ]);
-
-require __DIR__ . '/hybridauth.php';
 
 /**
  * Connect middleware/dispatcher filters.
