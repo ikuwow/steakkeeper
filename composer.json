@@ -11,7 +11,7 @@
         "cakephp/migrations": "~1.0",
         "cakephp/plugin-installer": "*",
         "cakephp/cakephp-codesniffer": "^2.0",
-        "admad/cakephp-hybridauth": "~3.0"
+        "hybridauth/hybridauth": "~2.5.1"
     },
     "require-dev": {
         "psy/psysh": "@stable",
