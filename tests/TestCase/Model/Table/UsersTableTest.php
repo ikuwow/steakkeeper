@@ -16,9 +16,11 @@ class UsersTableTest extends TestCase
      *
      * @var array
      */
+    /* Not implemented...
     public $fixtures = [
         'app.users'
     ];
+     */
 
     /**
      * setUp method
