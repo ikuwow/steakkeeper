@@ -2,7 +2,6 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
-use Cake\Core\Configure;
 
 /**
  * Users Controller
@@ -11,6 +10,18 @@ use Cake\Core\Configure;
  */
 class UsersController extends AppController
 {
+
+    /**
+     * Before Filter
+     *
+     * @param \Cake\Event\Event $event The beforeFilter event.
+     * @return null
+     */
+    public function beforeFilter(\Cake\Event\Event $event)
+    {
+        parent::beforeFilter($event);
+        $this->Auth->allow(['callback']);
+    }
 
     /**
      * Login action
@@ -23,7 +34,9 @@ class UsersController extends AppController
             // nothing to do
             // display 'login with github' button
         } else {
-            // $this->Session->write('oauth2state',
+            $url = $this->GitHub->getAuthorizationUrl(); // it must be here before getState()
+            $this->Session->write('oauth2state', $this->GitHub->getState());
+            return $this->redirect($url);
         }
     }
 
@@ -34,6 +47,17 @@ class UsersController extends AppController
      */
     public function callback()
     {
+        $state = $this->Session->read('oauth2state');
+        $this->Session->delete('oauth2state');
+        if (empty($state) || ($this->request->query('state') !== $state)) {
+            throw new \Cake\Network\Exception\BadRequestException('Invalid state');
+        }
+        $accessToken = $this->GitHub->getAccessToken('Authorization_code', [
+            'code' => $this->request->query('code')
+        ]);
+        $user = $this->GitHub->getResourceOwner($accessToken);
+        debug($user);
+        exit;
     }
 
     /**

@@ -16,7 +16,7 @@ namespace App\Controller;
 
 use Cake\Controller\Controller;
 use Cake\Event\Event;
-
+use Cake\Core\Configure;
 /**
  * Application Controller
  *
@@ -29,6 +29,25 @@ class AppController extends Controller
 {
 
     public $components = ['Auth'];
+
+    public $GitHub;
+    public $Session;
+
+
+    /**
+      * Before Filter
+      *
+      * @param \Cake\Event\Event $event The beforeFilter event.
+      * @return null
+      */
+    public function beforeFilter(Event $event)
+    {
+        parent::beforeFilter($event);
+        $this->GitHub = new \League\OAuth2\Client\Provider\Github([
+            'clientId'          => Configure::read('GitHub.clientId'),
+            'clientSecret'      => Configure::read('GitHub.clientSecret')
+        ]);
+    }
 
     /**
      * Initialization hook method.
@@ -45,6 +64,7 @@ class AppController extends Controller
 
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
+        $this->Session = $this->request->session();
     }
 
     /**
