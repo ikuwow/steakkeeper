@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Core\Configure;
 
 /**
  * Users Controller
@@ -14,17 +15,25 @@ class UsersController extends AppController
     /**
      * Login action
      *
-     * @return \Cake\Network\Response|null
+     * @return void
      */
     public function login()
     {
-        if ($this->request->is('post')) {
-            $user = $this->Auth->identify();
-            if ($user) {
-                $this->Auth->setUser($user);
-                return $this->redirect($this->Auth->redirectUrl());
-            }
+        if (!$this->request->is('post')) {
+            // nothing to do
+            // display 'login with github' button
+        } else {
+            // $this->Session->write('oauth2state',
         }
+    }
+
+    /**
+     * Callback Action from GitHub
+     *
+     * @return void
+     */
+    public function callback()
+    {
     }
 
     /**

@@ -28,6 +28,8 @@ $testDbUser = getenv('CAKE_TEST_DB_USER');
 $testDbPass = getenv('CAKE_TEST_DB_PASS');
 $testDbName = getenv('CAKE_TEST_DB_NAME');
 
+$githubClientId = getenv('GITHUB_CLIENT_ID');
+$githubClientSecret = getenv('GITHUB_CLIENT_SECRET');
 
 return [
     /**
@@ -353,4 +355,10 @@ return [
     'Session' => [
         'defaults' => 'php',
     ],
+
+    // added by me
+    'GitHub' => [
+        'clientId' => $githubClientId,
+        'clientSecret' => $githubClientSecret
+    ]
 ];
