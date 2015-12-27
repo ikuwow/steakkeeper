@@ -11,7 +11,9 @@
         "cakephp/migrations": "~1.0",
         "cakephp/plugin-installer": "*",
         "cakephp/cakephp-codesniffer": "^2.0",
-        "hybridauth/hybridauth": "~2.5.1"
+        "hybridauth/hybridauth": "~2.5.1",
+        "league/oauth2-client": "^1.1",
+        "league/oauth2-github": "^0.2.0"
     },
     "require-dev": {
         "psy/psysh": "@stable",
