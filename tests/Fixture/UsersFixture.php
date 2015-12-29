@@ -18,15 +18,18 @@ class UsersFixture extends TestFixture
     // @codingStandardsIgnoreStart
     public $fields = [
         'id' => ['type' => 'integer', 'length' => 10, 'autoIncrement' => true, 'default' => null, 'null' => false, 'comment' => null, 'precision' => null, 'unsigned' => null],
+        'gh_user_id' => ['type' => 'integer', 'length' => 10, 'default' => null, 'null' => false, 'comment' => null, 'precision' => null, 'unsigned' => null, 'autoIncrement' => null],
         'email' => ['type' => 'string', 'length' => 255, 'default' => null, 'null' => false, 'comment' => null, 'precision' => null, 'fixed' => null],
         'password' => ['type' => 'string', 'length' => 255, 'default' => null, 'null' => false, 'comment' => null, 'precision' => null, 'fixed' => null],
         'name' => ['type' => 'string', 'length' => 255, 'default' => null, 'null' => false, 'comment' => null, 'precision' => null, 'fixed' => null],
-        'provider' => ['type' => 'string', 'length' => 255, 'default' => null, 'null' => false, 'comment' => null, 'precision' => null, 'fixed' => null],
-        'provider_uid' => ['type' => 'string', 'length' => 255, 'default' => null, 'null' => false, 'comment' => null, 'precision' => null, 'fixed' => null],
+        'access_token' => ['type' => 'string', 'length' => 255, 'default' => null, 'null' => false, 'comment' => 'The access token of GitHub API', 'precision' => null, 'fixed' => null],
         'created' => ['type' => 'timestamp', 'length' => null, 'default' => 'now()', 'null' => false, 'comment' => null, 'precision' => null],
         'modified' => ['type' => 'timestamp', 'length' => null, 'default' => 'now()', 'null' => false, 'comment' => null, 'precision' => null],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
+            'users_access_token' => ['type' => 'unique', 'columns' => ['access_token'], 'length' => []],
+            'users_email' => ['type' => 'unique', 'columns' => ['email'], 'length' => []],
+            'users_name' => ['type' => 'unique', 'columns' => ['name'], 'length' => []],
         ],
     ];
     // @codingStandardsIgnoreEnd
@@ -39,13 +42,13 @@ class UsersFixture extends TestFixture
     public $records = [
         [
             'id' => 1,
-            'email' => 'Lorem ipsum dolor sit amet',
-            'password' => 'Lorem ipsum dolor sit amet',
-            'name' => 'Lorem ipsum dolor sit amet',
-            'provider' => 'Lorem ipsum dolor sit amet',
-            'provider_uid' => 'Lorem ipsum dolor sit amet',
-            'created' => 1449062122,
-            'modified' => 1449062122
+            'gh_user_id' => 1,
+            'email' => 'example@example.com',
+            'password' => 'asdfasdfasdfasdf',
+            'name' => 'namename-.',
+            'access_token' => 'asdfasdfasdfasdf',
+            'created' => '2015-01-01 00:00:00',
+            'modified' => '2015-01-01 00:00:00'
         ],
     ];
 }

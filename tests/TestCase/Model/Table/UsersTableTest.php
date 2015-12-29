@@ -16,11 +16,9 @@ class UsersTableTest extends TestCase
      *
      * @var array
      */
-    /* Not implemented...
     public $fixtures = [
         'app.users'
     ];
-     */
 
     /**
      * setUp method
@@ -63,16 +61,18 @@ class UsersTableTest extends TestCase
      */
     public function testValidationDefault()
     {
-        $this->markTestIncomplete('Not implemented yet.');
-    }
-
-    /**
-     * Test buildRules method
-     *
-     * @return void
-     */
-    public function testBuildRules()
-    {
-        $this->markTestIncomplete('Not implemented yet.');
+        $user = $this->Users->newEntity([
+            'gh_user_id' => 12345678,
+            'email' => 'testuser1@example.com',
+            'password' => 'examplehash',
+            'name' => 'jhgdr874',
+            'access_token' => 'ababab8969869abab'
+        ]);
+        var_export($user->errors());
+        $this->assertEmpty($user->errors());
+        /* TODO: this fails, why?
+        $result = $this->Users->save($user);
+        $this->assertEquals($result,true);
+         */
     }
 }

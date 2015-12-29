@@ -40,29 +40,43 @@ class UsersTable extends Table
     public function validationDefault(Validator $validator)
     {
         $validator
-            ->add('id', 'valid', ['rule' => 'numeric'])
-            ->allowEmpty('id', 'create');
+            ->notEmpty('id')
+            ->add('id', 'valid', ['rule' => 'numeric']);
 
         $validator
-            ->add('email', 'valid', ['rule' => 'email'])
-            ->requirePresence('email', 'create')
-            ->notEmpty('email');
+            ->notEmpty('gh_user_id')
+            ->add('gh_user_id', 'valid', ['rule' => 'numeric'])
+            ->add('gh_user_id', ['unique' => ['rule' => 'validateUnique', 'provider' => 'table']]);
 
         $validator
-            ->requirePresence('password', 'create')
+            ->notEmpty('email', 'Please input email address.')
+            ->add('email', 'valid', ['rule' => 'email', 'message' => 'Invalid email address.'])
+            ->add('email', ['unique' => [
+                'rule' => 'validateUnique', 'provider' => 'table', 'message' => 'That address is already exists.'
+            ]]);
+
+        $validator
             ->notEmpty('password');
 
         $validator
-            ->requirePresence('name', 'create')
-            ->notEmpty('name');
+            ->notEmpty('name', 'Please fill username')
+            ->add('name', ['max' => ['rule' => ['maxLength', 32], 'message' => 'username must be between 4 and 32']])
+            ->add('name', ['min' => ['rule' => ['minLength', 4], 'message' => 'username must be between 4 and 32']])
+            ->add('name', ['unique' => [
+                'rule' => 'validateUnique', 'provider' => 'table', 'message' => 'That username is already exists.'
+            ]])
+            ->add('name', 'valid', [
+                'rule' => function ($value, $context) {
+                    return (bool)preg_match('/^[0-9a-zA-Z\.\-_]+$/', $value);
+                }
+            ]);
 
         $validator
-            ->requirePresence('provider', 'create')
-            ->notEmpty('provider');
-
-        $validator
-            ->requirePresence('provider_uid', 'create')
-            ->notEmpty('provider_uid');
+            ->notEmpty('access_token')
+            ->add('access_token', 'valid', ['rule' => 'alphaNumeric'])
+            ->add('name', ['unique' => [
+                'rule' => 'validateUnique', 'provider' => 'table', 'message' => 'Non-unique access token.'
+            ]]);
 
         return $validator;
     }
