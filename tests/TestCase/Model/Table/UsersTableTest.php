@@ -62,17 +62,14 @@ class UsersTableTest extends TestCase
     public function testValidationDefault()
     {
         $user = $this->Users->newEntity([
-            'gh_user_id' => 12345678,
+            'gh_user_id' => 12340101,
             'email' => 'testuser1@example.com',
             'password' => 'examplehash',
             'name' => 'jhgdr874',
             'access_token' => 'ababab8969869abab'
         ]);
-        var_export($user->errors());
         $this->assertEmpty($user->errors());
-        /* TODO: this fails, why?
         $result = $this->Users->save($user);
-        $this->assertEquals($result,true);
-         */
+        $this->assertEquals(get_class($result), 'App\Model\Entity\User');
     }
 }

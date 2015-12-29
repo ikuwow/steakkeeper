@@ -15,7 +15,7 @@ class UsersController extends AppController
      * Before Filter
      *
      * @param \Cake\Event\Event $event The beforeFilter event.
-     * @return null
+     * @return void
      */
     public function beforeFilter(\Cake\Event\Event $event)
     {
@@ -26,7 +26,7 @@ class UsersController extends AppController
     /**
      * Login action
      *
-     * @return void
+     * @return \Cake\Network\Response|null
      */
     public function login()
     {

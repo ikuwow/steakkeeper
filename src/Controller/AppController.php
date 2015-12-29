@@ -39,11 +39,12 @@ class AppController extends Controller
      * Before Filter
      *
      * @param \Cake\Event\Event $event The beforeFilter event.
-     * @return null
+     * @return void
      */
     public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);
+        $this->Session = $this->request->session();
         $this->GitHub = new \League\OAuth2\Client\Provider\Github([
             'clientId' => Configure::read('GitHub.clientId'),
             'clientSecret' => Configure::read('GitHub.clientSecret')
@@ -65,7 +66,6 @@ class AppController extends Controller
 
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
-        $this->Session = $this->request->session();
     }
 
     /**

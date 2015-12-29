@@ -41,7 +41,7 @@ class UsersFixture extends TestFixture
      */
     public $records = [
         [
-            'id' => 1,
+            'id' => 1234,
             'gh_user_id' => 1,
             'email' => 'example@example.com',
             'password' => 'asdfasdfasdfasdf',
