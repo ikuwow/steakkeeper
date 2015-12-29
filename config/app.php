@@ -9,6 +9,7 @@ switch (getenv('CAKE_ENV')) {
         $debug = false;
         break;
     case 'development':
+    case 'test':
         $debug = true;
         break;
     default:
