@@ -13,6 +13,9 @@ class CreateUsers extends AbstractMigration
     public function change()
     {
         $table = $this->table('users');
+        $table->addColumn('gh_user_id', 'integer', [
+            'null' => false,
+        ]);
         $table->addColumn('email', 'string', [
             'limit' => 255,
             'null' => false,
@@ -25,15 +28,10 @@ class CreateUsers extends AbstractMigration
             'limit' => 255,
             'null' => false,
         ]);
-        $table->addColumn('provider', 'string', [
-            'default' => null,
+        $table->addColumn('access_token', 'string', [
             'limit' => 255,
             'null' => false,
-        ]);
-        $table->addColumn('provider_uid', 'string', [
-            'default' => null,
-            'limit' => 255,
-            'null' => false,
+            'comment' => 'The access token of GitHub API'
         ]);
         $table->addColumn('created', 'datetime', [
             'default' => 'CURRENT_TIMESTAMP',
@@ -45,6 +43,10 @@ class CreateUsers extends AbstractMigration
             'limit' => 255,
             'null' => false,
         ]);
+
+        $table->addIndex('name', ['unique' => true]);
+        $table->addIndex('email', ['unique' => true]);
+        $table->addIndex('access_token', ['unique' => true]);
         $table->create();
     }
 }
