@@ -15,8 +15,9 @@
 namespace App\Controller;
 
 use Cake\Controller\Controller;
-use Cake\Event\Event;
 use Cake\Core\Configure;
+use Cake\Event\Event;
+
 /**
  * Application Controller
  *
@@ -35,17 +36,17 @@ class AppController extends Controller
 
 
     /**
-      * Before Filter
-      *
-      * @param \Cake\Event\Event $event The beforeFilter event.
-      * @return null
-      */
+     * Before Filter
+     *
+     * @param \Cake\Event\Event $event The beforeFilter event.
+     * @return null
+     */
     public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);
         $this->GitHub = new \League\OAuth2\Client\Provider\Github([
-            'clientId'          => Configure::read('GitHub.clientId'),
-            'clientSecret'      => Configure::read('GitHub.clientSecret')
+            'clientId' => Configure::read('GitHub.clientId'),
+            'clientSecret' => Configure::read('GitHub.clientSecret')
         ]);
     }
 
