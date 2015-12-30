@@ -43,7 +43,7 @@ class UsersController extends AppController
     /**
      * Callback Action from GitHub
      *
-     * @return void
+     * @return \Cake\Network\Response
      */
     public function callback()
     {
@@ -55,9 +55,28 @@ class UsersController extends AppController
         $accessToken = $this->GitHub->getAccessToken('Authorization_code', [
             'code' => $this->request->query('code')
         ]);
-        $user = $this->GitHub->getResourceOwner($accessToken);
-        debug($user);
-        exit;
+        $ghUser = $this->GitHub->getResourceOwner($accessToken)->toArray();
+
+        $user = $this->Users->find()
+            ->where(['gh_user_id' => $ghUser['id']])
+            ->first();
+        if (!empty($user)) { // already registered
+            $this->Auth->setUser($user->toArray());
+            return $this->redirect(['controller' => 'pages', 'action' => 'top']);
+        } else { // newcomer
+            $userEntity = $this->Users->newEntity([
+                'gh_user_id' => $ghUser['id'],
+                'email' => $ghUser['email'], // probably null
+                'name' => $ghUser['login'],
+                'access_token' => $accessToken->getToken()
+            ]);
+            if ($this->Users->save($userEntity)) {
+                $this->Auth->setUser($userEntity->toArray());
+                return $this->redirect(['controller' => 'pages', 'action' => 'top']);
+            } else {
+                throw new \Cake\Network\Exception\BadRequestException('Unable to register...');
+            };
+        }
     }
 
     /**
