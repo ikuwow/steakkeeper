@@ -63,10 +63,8 @@ class UsersTableTest extends TestCase
     {
         $user = $this->Users->newEntity([
             'gh_user_id' => 12340101,
-            'email' => 'testuser1@example.com',
-            'password' => 'examplehash',
             'name' => 'jhgdr874',
-            'access_token' => 'ababab8969869abab'
+            'access_token' => 'ababab8969869abab',
         ]);
         $this->assertEmpty($user->errors());
         $result = $this->Users->save($user);

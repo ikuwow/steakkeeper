@@ -49,7 +49,8 @@ class UsersTable extends Table
             ->add('gh_user_id', ['unique' => ['rule' => 'validateUnique', 'provider' => 'table']]);
 
         $validator
-            ->notEmpty('email', 'Please input email address.')
+            // ->notEmpty('email', 'Please input email address.')
+            ->allowEmpty('email')
             ->add('email', 'valid', ['rule' => 'email', 'message' => 'Invalid email address.'])
             ->add('email', ['unique' => [
                 'rule' => 'validateUnique', 'provider' => 'table', 'message' => 'That address is already exists.'
