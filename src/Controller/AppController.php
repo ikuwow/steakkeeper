@@ -29,7 +29,14 @@ use Cake\Event\Event;
 class AppController extends Controller
 {
 
-    public $components = ['Auth'];
+    public $components = [
+        'Auth' => [
+            'logoutRedirect' => [
+                'controller' => 'Pages',
+                'action' => 'top'
+            ]
+        ]
+    ];
 
     public $GitHub;
     public $Session;
@@ -49,6 +56,8 @@ class AppController extends Controller
             'clientId' => Configure::read('GitHub.clientId'),
             'clientSecret' => Configure::read('GitHub.clientSecret')
         ]);
+
+        $this->set('loginUser', $this->Auth->user());
     }
 
     /**

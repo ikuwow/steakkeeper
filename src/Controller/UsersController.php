@@ -41,6 +41,16 @@ class UsersController extends AppController
     }
 
     /**
+     * Login action
+     *
+     * @return \Cake\Network\Response|null
+     */
+    public function logout()
+    {
+        return $this->redirect($this->Auth->logout());
+    }
+
+    /**
      * Callback Action from GitHub
      *
      * @return \Cake\Network\Response
