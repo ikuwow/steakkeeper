@@ -18,7 +18,7 @@ class DashboardControllerTest extends IntegrationTestCase
     public function testIndex()
     {
         $this->session($this->_setUserSession());
-        $this->get('/');
+        $this->get('/dashboard');
         $this->assertResponseOk();
     }
 

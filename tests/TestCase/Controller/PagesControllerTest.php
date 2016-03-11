@@ -53,4 +53,42 @@ class PagesControllerTest extends IntegrationTestCase
         $this->assertResponseError();
         $this->assertResponseContains('Error');
     }
+
+    /**
+     * Test toppage (not logged in)
+     *
+     * @return void
+     */
+    public function testTop()
+    {
+        $this->get('/');
+        $this->assertNoRedirect();
+
+        $this->session($this->_setUserSession());
+        $this->get('/');
+        $this->assertRedirect([
+            'controller' => 'Dashboard',
+            'action' => 'index'
+        ]);
+    }
+
+    /**
+     * Login method in test
+     *
+     * @return array
+     */
+    protected function _setUserSession()
+    {
+        return [
+            'Auth' => [
+                'User' => [
+                    'id' => 100,
+                    'email' => 'john.doe@crm.com',
+                    'name' => 'testuser',
+                    'created' => '2015-04-01 22:26:51',
+                    'modified' => '2015-04-01 22:26:51'
+                ]
+            ]
+        ];
+    }
 }

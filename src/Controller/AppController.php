@@ -31,6 +31,10 @@ class AppController extends Controller
 
     public $components = [
         'Auth' => [
+            'loginRedirect' => [
+                'controller' => 'Dashboard',
+                'action' => 'index'
+            ],
             'logoutRedirect' => [
                 'controller' => 'Pages',
                 'action' => 'top'

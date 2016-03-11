@@ -47,6 +47,12 @@ class PagesController extends AppController
      */
     public function top()
     {
+        if ($this->Auth->user()) {
+            $this->redirect([
+                'controller' => 'Dashboard',
+                'action' => 'index'
+            ]);
+        }
     }
 
     /**
