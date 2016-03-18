@@ -35,9 +35,8 @@ class PagesControllerTest extends IntegrationTestCase
      */
     public function testDisplay()
     {
-        $this->get('/pages/home');
+        $this->get('/');
         $this->assertResponseOk();
-        $this->assertResponseContains('CakePHP');
         $this->assertResponseContains('<html>');
     }
 
@@ -49,25 +48,47 @@ class PagesControllerTest extends IntegrationTestCase
     public function testMissingTemplate()
     {
         Configure::write('debug', false);
-        $this->get('/pages/not_existing');
+        $this->get('/not_existing_page');
 
         $this->assertResponseError();
         $this->assertResponseContains('Error');
     }
 
     /**
-     * Test that missing template in debug mode renders missing_template error page
+     * Test toppage (not logged in)
      *
      * @return void
      */
-    public function testMissingTemplateInDebug()
+    public function testTop()
     {
-        Configure::write('debug', true);
-        $this->get('/pages/not_existing');
+        $this->get('/');
+        $this->assertNoRedirect();
 
-        $this->assertResponseFailure();
-        $this->assertResponseContains('Missing Template');
-        $this->assertResponseContains('Stacktrace');
-        $this->assertResponseContains('not_existing.ctp');
+        $this->session($this->_setUserSession());
+        $this->get('/');
+        $this->assertRedirect([
+            'controller' => 'Dashboard',
+            'action' => 'index'
+        ]);
+    }
+
+    /**
+     * Login method in test
+     *
+     * @return array
+     */
+    protected function _setUserSession()
+    {
+        return [
+            'Auth' => [
+                'User' => [
+                    'id' => 100,
+                    'email' => 'john.doe@crm.com',
+                    'name' => 'testuser',
+                    'created' => '2015-04-01 22:26:51',
+                    'modified' => '2015-04-01 22:26:51'
+                ]
+            ]
+        ];
     }
 }

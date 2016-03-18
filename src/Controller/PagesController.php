@@ -15,6 +15,7 @@
 namespace App\Controller;
 
 use Cake\Core\Configure;
+use Cake\Event\Event;
 use Cake\Network\Exception\NotFoundException;
 use Cake\View\Exception\MissingTemplateException;
 
@@ -29,11 +30,29 @@ class PagesController extends AppController
 {
 
     /**
+     * beforeFilter
+     *
+     * @param Event $event An Event instance
+     * @return void \Cake\Network\Response|null
+     */
+    public function beforeFilter(Event $event)
+    {
+        parent::beforeFilter($event);
+        $this->Auth->allow(['top']);
+    }
+
+    /**
      * toppage
      * @return void
      */
     public function top()
     {
+        if ($this->Auth->user()) {
+            $this->redirect([
+                'controller' => 'Dashboard',
+                'action' => 'index'
+            ]);
+        }
     }
 
     /**

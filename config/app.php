@@ -9,6 +9,7 @@ switch (getenv('CAKE_ENV')) {
         $debug = false;
         break;
     case 'development':
+    case 'test':
         $debug = true;
         break;
     default:
@@ -28,6 +29,8 @@ $testDbUser = getenv('CAKE_TEST_DB_USER');
 $testDbPass = getenv('CAKE_TEST_DB_PASS');
 $testDbName = getenv('CAKE_TEST_DB_NAME');
 
+$githubClientId = getenv('GITHUB_CLIENT_ID');
+$githubClientSecret = getenv('GITHUB_CLIENT_SECRET');
 
 return [
     /**
@@ -278,7 +281,7 @@ return [
          */
         'test' => [
             'className' => 'Cake\Database\Connection',
-            'driver' => 'Cake\Database\Driver\Mysql',
+            'driver' => 'Cake\Database\Driver\Postgres',
             'persistent' => false,
             'host' => $testDbHost,
             //'port' => 'nonstandard_port_number',
@@ -353,4 +356,10 @@ return [
     'Session' => [
         'defaults' => 'php',
     ],
+
+    // added by me
+    'GitHub' => [
+        'clientId' => $githubClientId,
+        'clientSecret' => $githubClientSecret
+    ]
 ];

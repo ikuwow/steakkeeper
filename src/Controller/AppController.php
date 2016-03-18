@@ -15,6 +15,7 @@
 namespace App\Controller;
 
 use Cake\Controller\Controller;
+use Cake\Core\Configure;
 use Cake\Event\Event;
 
 /**
@@ -27,6 +28,41 @@ use Cake\Event\Event;
  */
 class AppController extends Controller
 {
+
+    public $components = [
+        'Auth' => [
+            'loginRedirect' => [
+                'controller' => 'Dashboard',
+                'action' => 'index'
+            ],
+            'logoutRedirect' => [
+                'controller' => 'Pages',
+                'action' => 'top'
+            ]
+        ]
+    ];
+
+    public $GitHub;
+    public $Session;
+
+
+    /**
+     * Before Filter
+     *
+     * @param \Cake\Event\Event $event The beforeFilter event.
+     * @return void
+     */
+    public function beforeFilter(Event $event)
+    {
+        parent::beforeFilter($event);
+        $this->Session = $this->request->session();
+        $this->GitHub = new \League\OAuth2\Client\Provider\Github([
+            'clientId' => Configure::read('GitHub.clientId'),
+            'clientSecret' => Configure::read('GitHub.clientSecret')
+        ]);
+
+        $this->set('loginUser', $this->Auth->user());
+    }
 
     /**
      * Initialization hook method.

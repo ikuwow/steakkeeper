@@ -1,5 +1,11 @@
 language: php
 
+services:
+  - postgresql
+
+addons:
+  - postgresql: "9.3"
+
 sudo: false
 
 php:
@@ -7,11 +13,13 @@ php:
   - 5.6
 
 before_script:
+  - psql -c 'create database test_streakkeeper;' -U postgres
   - sh -c "composer require 'cakephp/cakephp-codesniffer:dev-master'"
   - phpenv rehash
 
 script:
-  - sh -c "vendor/bin/phpcs -p --extensions=php --standard=vendor/cakephp/cakephp-codesniffer/CakePHP ./src ./tests ./config ./webroot"
+  - sh -c "vendor/bin/phpcs -p --extensions=php --standard=vendor/cakephp/cakephp-codesniffer/CakePHP ./src ./tests ./config ./webroot --ignore=./config/Migrations/"
+  - sh -c "vendor/bin/phpunit"
 
 notifications:
   email: false
