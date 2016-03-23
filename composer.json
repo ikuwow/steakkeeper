@@ -13,7 +13,8 @@
         "cakephp/cakephp-codesniffer": "^2.0",
         "hybridauth/hybridauth": "~2.5.1",
         "league/oauth2-client": "^1.1",
-        "league/oauth2-github": "^0.2.0"
+        "league/oauth2-github": "^0.2.0",
+        "knplabs/github-api": "*"
     },
     "require-dev": {
         "psy/psysh": "@stable",
