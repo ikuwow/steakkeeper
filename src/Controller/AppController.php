@@ -43,8 +43,8 @@ class AppController extends Controller
     ];
 
     public $GitHub;
+    public $GitHubClient;
     public $Session;
-
 
     /**
      * Before Filter
@@ -55,11 +55,19 @@ class AppController extends Controller
     public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);
+
         $this->Session = $this->request->session();
+
         $this->GitHub = new \League\OAuth2\Client\Provider\Github([
             'clientId' => Configure::read('GitHub.clientId'),
             'clientSecret' => Configure::read('GitHub.clientSecret')
         ]);
+
+        $this->GitHubClient = new \Github\Client(
+            new \Github\HttpClient\CachedHttpClient([
+                'cache_dir' => CACHE . 'github-api'
+            ])
+        );
 
         $this->set('loginUser', $this->Auth->user());
     }
